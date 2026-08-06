@@ -142,6 +142,8 @@ h2 {
 
 .socialButton:active {
     transform: translateY(-0.5px);
+
+    box-shadow: 0px 1px 5px var(--shadow-color);
 }
 
 .socialButton.reddit {
