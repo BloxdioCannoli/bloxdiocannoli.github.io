@@ -34,7 +34,7 @@ body {
     height: 100%;
     z-index: -1;
 
-    background-image: url("img/testmode-background.png");
+    background-image: url("img/testmode-background-compressed.png");
     background-color: rgba(0, 0, 0, 0.3);
     background-size: cover;
     background-position: center;
