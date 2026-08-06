@@ -6,10 +6,24 @@
 }
 
 * {
+    box-sizing: border-box;
     overscroll-behavior: none;
 }
 
+html,
 body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 30px;
     font-family: monospace;
 
     /* background: linear-gradient(30deg, rgb(6, 224, 6), rgb(182, 229, 88)); */
@@ -18,8 +32,10 @@ body {
     color: white;
 
     text-align: center;
+}
 
-    min-height: 100vh;
+.section-cont {
+    flex: 1;
 }
 
 ::-webkit-scrollbar {
@@ -80,7 +96,6 @@ h2 {
 
     width: 100%;
     top: 10px;
-    left: -5px;
 }
 
 .section {
@@ -94,7 +109,7 @@ h2 {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
 
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
 .section h1 {
@@ -196,4 +211,63 @@ h2 {
 
 .socialButton img {
     height: 10px;
+}
+
+ul li {
+    margin-left: -20px;
+}
+
+.faq-header {
+    font-weight: 700;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.faq-content {
+    font-weight: 500;
+    display: none;
+}
+
+.faq-header .faq-arrow {
+    height: 14px;
+    display: inline-block;
+}
+
+.faq-header.selected .faq-arrow {
+    rotate: 90deg;
+    height: 14px;
+    display: inline-block;
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+a {
+    color: rgb(206, 206, 206);
+
+    transition-duration: 0.3s;
+}
+
+a:hover {
+    color: rgb(175, 175, 175);
+}
+
+.footer {
+    position: static;
+
+    width: 100%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    opacity: 0.5;
+    padding-right: 10px;
+}
+
+.footer-container {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
 }
