@@ -1,0 +1,197 @@
+@font-face {
+    font-family: "Monocraft";
+    src: url("Monocraft.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    overscroll-behavior: none;
+}
+
+body {
+    font-family: monospace;
+
+    /* background: linear-gradient(30deg, rgb(6, 224, 6), rgb(182, 229, 88)); */
+    background: black;
+
+    color: white;
+
+    text-align: center;
+
+    min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    background-image: url("img/testmode-background.png");
+    background-color: rgba(0, 0, 0, 0.3);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    filter: blur(2px);
+    transform: scale(1.2);
+
+    background-blend-mode: overlay;
+}
+
+h1 {
+    font-family: "Monocraft";
+    word-spacing: -5px;
+    font-weight: 1000;
+
+    font-size: 30px;
+
+    text-shadow: -1px -1px 0 black,
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black,
+        3px 3px 0px black;
+}
+
+h2 {
+    font-family: monospace;
+    font-size: 20px;
+    font-weight: 900;
+
+    margin-top: 30px;
+    margin-bottom: -5px;
+}
+
+.section-cont {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 100%;
+    top: 10px;
+    left: -5px;
+}
+
+.section {
+    display: block;
+    margin-top: 10px;
+
+    width: 95vw;
+    text-align: left;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.section h1 {
+    margin-top: -10px;
+}
+
+.section p:not(.buttonRow) {
+    margin-bottom: 0px;
+}
+
+.buttonRow {
+    cursor: default;
+    user-select: none;
+    -moz-user-select: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.socialButton {
+    display: inline-block;
+    width: fit-content;
+
+    background-color: rgb(54, 57, 60);
+
+    border: 1px solid rgb(95, 93, 93);
+    border-radius: 3px;
+
+    color: var(--color);
+    --color: white;
+
+    cursor: pointer;
+    font-weight: 700;
+
+    transition-duration: 0.2s;
+}
+
+.socialButton:hover {
+    transform: translateY(-2px);
+    background-color: rgb(43, 46, 48);
+
+    box-shadow: 0px 2px 5px var(--shadow-color);
+    --shadow-color: rgb(95, 93, 93);
+}
+
+.socialButton:active {
+    transform: translateY(-0.5px);
+}
+
+.socialButton.reddit {
+    --color: rgb(248, 169, 22);
+}
+
+.socialButton.reddit:hover {
+    --shadow-color: rgb(248, 169, 22);
+}
+
+.socialButton.youtube {
+    --color: rgb(255, 57, 57);
+}
+
+.socialButton.youtube:hover {
+    --shadow-color: rgb(255, 57, 57);
+}
+
+.socialButton.github {
+    --color: rgb(175, 177, 190);
+}
+
+.socialButton.github:hover {
+    --shadow-color: rgb(175, 177, 190);
+}
+
+.socialButton.bloxd {
+    --color: rgb(145, 143, 207);
+}
+
+.socialButton.bloxd:hover {
+    --shadow-color: rgb(145, 143, 207);
+}
+
+.socialButton.bloxdhub {
+    --color: rgb(182, 122, 44);
+}
+
+.socialButton.bloxdhub:hover {
+    --shadow-color: rgb(182, 122, 44);
+}
+
+.socialButton.discord {
+    --color: rgb(21, 164, 230);
+}
+
+.socialButton.discord:hover {
+    --shadow-color: rgb(21, 164, 230);
+}
+
+.socialButton img {
+    height: 10px;
+}
