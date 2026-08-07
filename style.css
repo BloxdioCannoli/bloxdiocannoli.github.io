@@ -41,10 +41,6 @@ img {
     -o-user-drag: none;
 }
 
-.section-cont {
-    flex: 1;
-}
-
 ::-webkit-scrollbar {
     display: none;
 }
@@ -103,6 +99,7 @@ h2 {
 
     width: 100%;
     top: 10px;
+    flex: 1;
 }
 
 .section {
@@ -216,6 +213,14 @@ h2 {
     --shadow-color: rgb(21, 164, 230);
 }
 
+.socialButton.code {
+    --color: rgb(239, 194, 118);
+}
+
+.socialButton.code:hover {
+    --shadow-color: rgb(239, 194, 118);
+}
+
 .socialButton img {
     height: 10px;
 }
@@ -249,6 +254,14 @@ ul li {
     -moz-user-select: none;
 
     transition-duration: 0.1s;
+}
+
+.faq-header.previewShow .faq-arrow {
+    rotate: 90deg;
+}
+
+.faq-header.selected.previewHide .faq-arrow {
+    rotate: 0deg;
 }
 
 .faq-header.selected .faq-arrow {
@@ -287,4 +300,96 @@ a:hover {
     width: 100%;
     text-align: left;
     margin-top: 20px;
+}
+
+#codesSearchInput {
+    flex: 1;
+    background-color: rgb(54, 57, 60);
+    border: 1px solid rgb(95, 93, 93);
+    border-radius: 3px;
+    padding: 3px;
+
+    color: white;
+
+    font-family: monospace;
+
+    width: fit-content;
+
+    outline: none !important;
+}
+
+#codesSearchInput::placeholder {
+    color: lightgray;
+}
+
+.submitBtn {
+    display: inline-block;
+    flex-shrink: 0;
+
+    background-color: rgb(54, 57, 60);
+
+    border: 1px solid rgb(95, 93, 93);
+    border-radius: 3px;
+
+    color: var(--color);
+    --color: white;
+
+    cursor: pointer;
+    font-weight: 700;
+
+    transition-duration: 0.2s;
+}
+
+.submitBtn:hover {
+    transform: translateY(-2px);
+    background-color: rgb(43, 46, 48);
+
+    box-shadow: 0px 2px 5px rgb(95, 93, 93);
+}
+
+.submitBtn:active {
+    transform: translateY(-0.5px);
+
+    box-shadow: 0px 1px 5px rgb(95, 93, 93);
+}
+
+.submitBtn.disabled {
+    display: inline-block;
+    cursor: not-allowed;
+    flex-shrink: 0;
+
+    background-color: rgb(70, 71, 71);
+
+    border: 1px solid rgb(95, 93, 93);
+    border-radius: 3px;
+
+    color: var(--color);
+    --color: white;
+
+    font-weight: 700;
+
+    transition-duration: 0.2s;
+}
+
+.submitBtn.disabled:hover {
+    transform: translateY(-1px);
+    background-color: rgb(49, 51, 52);
+
+    box-shadow: 0px 1px 5px rgb(95, 93, 93);
+}
+
+.submitBtn.disabled:active {
+    transform: translateY(-0.5px);
+
+    box-shadow: 0px 1px 5px rgb(95, 93, 93);
+}
+
+#submitCode {
+    display: none;
+}
+
+.searchInput-container {
+    display: flex;
+    gap: 3px;
+    align-items: stretch;
 }

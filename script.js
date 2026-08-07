@@ -1,5 +1,8 @@
 // Query detection setup with the URL
 const url = window.location.href;
+const path = window.location.pathname;
+var splitPath = path.split("/"); splitPath = splitPath.slice(1, splitPath.length - 1)
+
 let queryString = url.split("?")[1]?.split("#")[0];
 let queryObject = {};
 
@@ -152,4 +155,129 @@ for (let faqGroup of document.getElementsByClassName("faq")) {
             hideFaqContent(content, header)
         }
     })
+
+    header.addEventListener("mouseenter", () => {
+        let display = content.style.display;
+
+        header.classList.toggle("previewShow", display === "none");
+        header.classList.toggle("previewHide", display !== "none");
+    });
+
+    header.addEventListener("mouseleave", () => {
+        header.classList.remove("previewShow", "previewHide");
+    });
 }
+
+// Search
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const codes = [
+    {
+        title: "67 Kill Codes",
+        description: "3 codes (+1 bonus code) to kill 67's in Bloxd.io. Paste in 1 World Code and select any 4 ingame to use. Includes burning, miniguns, an infinite kill trap, and explosions.",
+        tags: [{ name: "Test Tag 1" }, { name: "Test Tag 2" }],
+        videos: ["https://youtube.com/@BloxdioCannoli"],
+        thumbnail: "67trapthumbnail.png",
+    }
+]
+function renderCodes(filter = null) {
+    const codeSearchOutput = document.getElementById("codeSearchOutput");
+    for (let codeNum in codes) {
+        let code = codes[codeNum]
+        let { title, description, tags, videos, thumbnail } = code;
+
+        codeSearchOutput.insertAdjacentHTML("beforebegin", `
+            <div class="section">
+                <h1>${title}</h1>
+                <i>${description}</i>
+
+                <p class="buttonRow">
+                <button class="socialButton youtube" id="viewVideo${codeNum}"><img src="/img/youtube-logo.png"> Watch on YouTube</button>
+                <button class="socialButton code" id="viewCode${codeNum}"><img src="img/code-block.png"> View Full Code</button>
+                </p>
+            </div>
+        `)
+
+        let viewCode = document.getElementById(`viewCode${codeNum}`)
+        let viewVideo = document.getElementById(`viewVideo${codeNum}`)
+
+        viewCode.addEventListener("click", () => {
+            // open code in full-screen mode
+        })
+
+        viewVideo.addEventListener("click", () => {
+            window.open(videos[0], "_blank")
+        })
+    }
+}
+
+
+renderCodes()
+if (path === "/codes/") {
+    const codeSearchOutput = document.getElementById("codeSearchOutput");
+    const codesSearchInput = document.getElementById("codesSearchInput")
+    const submitCode = document.getElementById("submitCode")
+
+    codesSearchInput.addEventListener("input", () => {
+        if (codesSearchInput.value.length > 0) {
+            submitCode.style.display = "block"
+        } else {
+            submitCode.style.display = "none"
+        }
+    })
+    submitCode.addEventListener("click", () => {
+        let value = codesSearchInput.value;
+
+        renderCodes()
+    })
+
+    let searchPlaceholders = ["Search by name", "Search by description", "Search by video URL", "Search by tags"]
+    let placeInSearchPlaceholdersArray = 0;
+    let placeInSearchPlaceholder = 0;
+    let typingMode = "add"
+
+    function typeInSearchInput() {
+        let waitFor;
+        let fullPlaceholder = searchPlaceholders[placeInSearchPlaceholdersArray]
+
+        codesSearchInput.placeholder = fullPlaceholder.slice(0, placeInSearchPlaceholder)
+
+        if (typingMode === "add") {
+            placeInSearchPlaceholder++;
+            waitFor = random(100, 280);
+        } else if (typingMode === "delete") {
+            placeInSearchPlaceholder--;
+            waitFor = random(100, 110);
+        }
+
+        if (placeInSearchPlaceholder > fullPlaceholder.length) {
+            typingMode = "delete"
+            waitFor = random(800, 1000)
+        }
+
+        if (placeInSearchPlaceholder <= 0 && typingMode === "delete") {
+            typingMode = "add"
+            placeInSearchPlaceholdersArray = (placeInSearchPlaceholdersArray + 1) % searchPlaceholders.length;
+            placeInSearchPlaceholder = 0;
+        }
+
+        setTimeout(() => {
+            typeInSearchInput()
+        }, waitFor);
+    }
+    typeInSearchInput()
+}
+
+// Footer
+document.querySelector(".section-cont").insertAdjacentHTML("beforeend", `
+    <div class="footer-container">
+        <div class="footer">
+            Site coded by Bloxdio Cannoli. Background image is a screenshot of
+            <a href="https://bloxd.io/game/classic_playerSchematic%7C9ro670z2AICkQXWaRuILD" target="_blank">TestMode</a>,
+            taken by Bloxdio Cannoli. Assets such as the white arrow are from <a href="https://bloxd.io" target="_blank">bloxd.io</a>. Contact me on Reddit or Discord for questions.
+            Please email me at BloxdioCannoli@proton.me for serious concerns.
+        </div>
+    </div>
+`);
