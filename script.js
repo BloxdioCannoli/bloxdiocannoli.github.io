@@ -57,22 +57,28 @@ for (let section of document.getElementsByClassName("section")) {
                 offset: 0,
 
                 opacity: 1,
+                boxShadow: "0px 0px 5px 5px rgba(0, 0, 0, 0.5)",
 
             },
             {
-                offset: 0.7,
+                offset: 0.5,
 
                 opacity: 0.6,
+                boxShadow: "0px 0px 5px 3px rgba(0, 0, 0, 0.5)",
             },
             {
                 offset: 1,
 
                 opacity: 1,
+                boxShadow: "0px 0px 5px 5px rgba(0, 0, 0, 0.5)",
             }
         ], {
             duration: 1500,
             iterations: 3,
+            easing: "ease-in-out"
         })
+
+        section.scrollIntoView();
     }
 }
 

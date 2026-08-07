@@ -34,6 +34,13 @@ body {
     text-align: center;
 }
 
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
 .section-cont {
     flex: 1;
 }
@@ -107,7 +114,7 @@ h2 {
     padding: 10px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
 
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.5);
 }
@@ -232,6 +239,11 @@ ul li {
 .faq-header .faq-arrow {
     height: 14px;
     display: inline-block;
+
+    user-select: none;
+    -moz-user-select: none;
+
+    transition-duration: 0.1s;
 }
 
 .faq-header.selected .faq-arrow {
@@ -243,7 +255,7 @@ ul li {
 .faq-container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
 }
 
 a {
