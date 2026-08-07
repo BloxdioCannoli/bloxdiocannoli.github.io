@@ -90,6 +90,10 @@ for (let socialButton of document.getElementsByClassName("socialButton")) {
     })
 }
 
+// FAQ button activation
+let faqSelect = queryObject.faqSelect
+faqSelect = decodeURIComponent(faqSelect).toLowerCase().replaceAll("_", " ").replaceAll("+", " ")
+
 for (let faqGroup of document.getElementsByClassName("faq")) {
     let header = faqGroup.getElementsByClassName("faq-header")[0]
     let content = faqGroup.getElementsByClassName("faq-content")[0]
@@ -97,16 +101,46 @@ for (let faqGroup of document.getElementsByClassName("faq")) {
     let innerHTML = header.innerHTML
     header.innerHTML = `<img src="img/white-arrow.png" class="faq-arrow"> ${innerHTML}`
 
-    content.style.display = "none"
-    header.className = "faq-header"
+    text = innerHTML.toLowerCase().replace("?", "")
+
+    function hideFaqContent(content, header) {
+        content.style.display = "none"
+        header.className = "faq-header"
+    }
+
+    function showFaqContent(content, header) {
+        content.style.display = "block"
+        header.className = "faq-header selected"
+    }
+
+    if (text === faqSelect) {
+        showFaqContent(content, header)
+
+        faqGroup.animate([
+            {
+                transform: "scale(100%)",
+            },
+            {
+                transform: "scale(101%)",
+            },
+            {
+                transform: "scale(100%)",
+            }
+        ], {
+            duration: 1500,
+            iterations: 3,
+            easing: "ease-in-out"
+        })
+    } else {
+        hideFaqContent(content, header)
+    }
+
     header.addEventListener("click", () => {
         let display = content.style.display
         if (display === "none") {
-            content.style.display = "block"
-            header.className = "faq-header selected"
+            showFaqContent(content, header)
         } else {
-            content.style.display = "none"
-            header.className = "faq-header"
+            hideFaqContent(content, header)
         }
     })
 }

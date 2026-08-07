@@ -35,10 +35,10 @@ body {
 }
 
 img {
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
 }
 
 .section-cont {
@@ -222,6 +222,10 @@ h2 {
 
 ul li {
     margin-left: -20px;
+}
+
+.faq {
+    display: inline-block;
 }
 
 .faq-header {
