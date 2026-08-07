@@ -56,20 +56,23 @@ for (let section of document.getElementsByClassName("section")) {
             {
                 offset: 0,
 
-                opacity: 1,
+                //opacity: 1,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
                 boxShadow: "0px 0px 5px 5px rgba(0, 0, 0, 0.5)",
 
             },
             {
                 offset: 0.5,
 
-                opacity: 0.6,
-                boxShadow: "0px 0px 5px 3px rgba(0, 0, 0, 0.5)",
+                //opacity: 0.6,
+                backgroundColor: "rgba(0, 0, 0, 0.3)",
+                boxShadow: "0px 0px 5px 3px rgba(0, 0, 0, 0.3)",
             },
             {
                 offset: 1,
 
-                opacity: 1,
+                //opacity: 1,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
                 boxShadow: "0px 0px 5px 5px rgba(0, 0, 0, 0.5)",
             }
         ], {
@@ -118,13 +121,19 @@ for (let faqGroup of document.getElementsByClassName("faq")) {
 
         faqGroup.animate([
             {
-                transform: "scale(100%)",
+                border: "5px dashed rgba(0, 0, 0, 0)",
+                padding: "5px",
+                //transform: "scale(100%)",
             },
             {
-                transform: "scale(101%)",
+                border: "5px dashed rgb(255, 255, 255)",
+                padding: "5px",
+                //transform: "scale(101%)",
             },
             {
-                transform: "scale(100%)",
+                border: "5px dashed rgba(0, 0, 0, 0)",
+                padding: "5px",
+                //transform: "scale(100%)",
             }
         ], {
             duration: 1500,

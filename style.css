@@ -226,6 +226,7 @@ ul li {
 
 .faq {
     display: inline-block;
+    width: fit-content;
 }
 
 .faq-header {
