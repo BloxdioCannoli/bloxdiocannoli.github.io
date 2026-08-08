@@ -20,17 +20,29 @@
                 <li><a href="/">Back</a></li>
             </ul>
 
-            <h2>Search Codes</h2><br>
+            <h2>Filter by text</h2><br>
             <div class="searchInput-container">
-            <input type="text" placeholder="" id="codesSearchInput">
-            <button id="submitCode" class="submitBtn">Search</button>
+                <input type="text" placeholder="" id="codesSearchInput">
+                <button id="clearSearch" class="submitBtn clearSearch">Clear Search</button>
+                <button id="submitSearch" class="submitBtn">Search</button>
+            </div>
+
+            <h2>Filter by tags</h2><br>
+            <div id="selectTags">
+                <div id="removeTagFilter" class="buttonRow inline">
+
+                </div>
+                <span id="tagDivider" class="tagDivider">|</span>
+                <div id="addTagFilter" class="buttonRow inline">
+
+                </div>
             </div>
         </div>
 
         <div id="codeSearchOutput">
 
         </div>
-        
+
     </div>
 
     <script src="/script.js"></script>

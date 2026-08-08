@@ -1,3 +1,36 @@
+/*
+Created by Bloxdio Cannoli
+*/
+
+// Some helper functions
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function isDeepEqual(obj1, obj2) {
+    if (obj1 === obj2) return true;
+
+    if (typeof obj1 !== 'object' || obj1 === null ||
+        typeof obj2 !== 'object' || obj2 === null) {
+        return false;
+    }
+
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+
+    if (keys1.length !== keys2.length) return false;
+
+    for (const key of keys1) {
+        if (!isDeepEqual(obj1[key], obj2[key])) return false;
+    }
+
+    return true;
+}
+
+function objectIsInsideArrayOfObjects(object, array) {
+    return array.some(item => isDeepEqual(item, object));
+}
+
 // Query detection setup with the URL
 const url = window.location.href;
 const path = window.location.pathname;
@@ -169,70 +202,310 @@ for (let faqGroup of document.getElementsByClassName("faq")) {
 }
 
 // Search
-function random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const codes = [
-    {
-        title: "67 Kill Codes",
-        description: "3 codes (+1 bonus code) to kill 67's in Bloxd.io. Paste in 1 World Code and select any 4 ingame to use. Includes burning, miniguns, an infinite kill trap, and explosions.",
-        tags: [{ name: "Test Tag 1" }, { name: "Test Tag 2" }],
-        videos: ["https://youtube.com/@BloxdioCannoli"],
-        thumbnail: "67trapthumbnail.png",
+if (path === "/codes/") {
+    const codes = [
+        {
+            title: "67 Kill Codes",
+            description: "3 codes (+1 bonus code) to kill 67's in Bloxd.io. Paste in 1 World Code and select any 4 ingame to use. Includes burning, miniguns, an infinite kill trap, and explosions.",
+            tags: [{ name: "Anti-Brainrot", type: "antibrainrot" }, { name: "New", type: "new" }],
+            videos: ["https://youtube.com/@BloxdioCannoli"],
+            thumbnail: "67trapthumbnail.png",
+        },
+        {
+            title: "Test Code",
+            description: "Desc",
+            tags: [{ name: "Test2", type: "antibrainrot" }, { name: "Test" }, { name: "Anti-Brainrot", type: "antibrainrot" }],
+            videos: ["https://youtube.com/@BloxdioCannoli"],
+            thumbnail: "67trapthumbnail.png",
+        },
+    ]
+    // initialize dynamic tags
+    const deselectedTags = []
+    for (let code of codes) {
+        for (let tag of code.tags) {
+            if (!objectIsInsideArrayOfObjects(tag, deselectedTags ?? [])) {
+                deselectedTags.push(tag)
+            }
+        }
     }
-]
-function renderCodes(filter = null) {
-    const codeSearchOutput = document.getElementById("codeSearchOutput");
-    for (let codeNum in codes) {
-        let code = codes[codeNum]
-        let { title, description, tags, videos, thumbnail } = code;
 
-        codeSearchOutput.insertAdjacentHTML("beforebegin", `
-            <div class="section">
+    function renderCodes(filter = {}) {
+        const codeSearchOutput = document.getElementById("codeSearchOutput");
+        codeSearchOutput.innerHTML = ""
+
+        // iterate through `codes` object[]
+        codeSearchOutput.insertAdjacentHTML("beforeend", `
+        <div id="resultNofif">
+
+        </div>
+    `)
+        let results = 0;
+        for (let codeNum in codes) {
+            let code = codes[codeNum]
+            let { title, description, tags, videos, thumbnail } = code;
+
+            let tagsRawText = ``
+            for (let tag of tags) {
+                let { name } = tag;
+
+                tagsRawText += name
+            }
+            let toSearch = `${title}${description}${tagsRawText}${videos.join("")}`
+
+            // filter if needed
+            if (filter) {
+                let { filterType, shouldInclude, needsTags } = filter
+                if (shouldInclude) {
+                    if (!toSearch.includes(shouldInclude)) { continue }
+                }
+                // a code must include all of the tags
+                if (needsTags) {
+                    let hasAll = true;
+                    for (let tag of needsTags) {
+                        if (!objectIsInsideArrayOfObjects(tag, tags ?? [])) { hasAll = false; break; }
+                    }
+                    if (!hasAll) { continue }
+                }
+            }
+            results++;
+
+            // initial tag processing, per-code result
+            let tagsHTML = ``
+            for (let tagNum in tags) {
+                let tag = tags[tagNum]
+                let { name, type } = tag;
+
+                tagsHTML += `<span id="codePreviewTag${codeNum}${tagNum}" class="codePreviewTag notClickable${type ? ` ${type}` : ""}">${name}</span>`
+            }
+            // insert html
+            codeSearchOutput.insertAdjacentHTML("beforeend", `
+            <div class="section searchResult">
                 <h1>${title}</h1>
-                <i>${description}</i>
+                <p class="codePreviewTagGroup">
+                ${tagsHTML}
+                </p>
+
+                <p class="codePreviewDescription">${description}</p>
 
                 <p class="buttonRow">
                 <button class="socialButton youtube" id="viewVideo${codeNum}"><img src="/img/youtube-logo.png"> Watch on YouTube</button>
-                <button class="socialButton code" id="viewCode${codeNum}"><img src="img/code-block.png"> View Full Code</button>
+                <button class="socialButton code" id="viewCode${codeNum}"><img id="viewCodeImg${codeNum}" src="img/code-block.png"> View Full Code</button>
                 </p>
             </div>
         `)
+            // configure tags
+            for (let tagNum in tags) {
+                let tagElem = document.getElementById(`codePreviewTag${codeNum}${tagNum}`)
+                tagElem.addEventListener("click", () => {
+                    // select the tag
+                })
+            }
 
-        let viewCode = document.getElementById(`viewCode${codeNum}`)
-        let viewVideo = document.getElementById(`viewVideo${codeNum}`)
+            let viewCode = document.getElementById(`viewCode${codeNum}`)
+            let viewVideo = document.getElementById(`viewVideo${codeNum}`)
+            let viewCodeImg = document.getElementById(`viewCodeImg${codeNum}`)
 
-        viewCode.addEventListener("click", () => {
-            // open code in full-screen mode
-        })
+            viewCode.addEventListener("click", () => {
+                // open code in full-screen mode
+            })
 
-        viewVideo.addEventListener("click", () => {
-            window.open(videos[0], "_blank")
-        })
+            viewCode.addEventListener("mouseenter", () => {
+                viewCodeImg.src = "img/code-block-spin.gif"
+            })
+            viewCode.addEventListener("mouseleave", () => {
+                viewCodeImg.src = "img/code-block.png"
+            })
+
+
+            viewVideo.addEventListener("click", () => {
+                window.open(videos[0], "_blank")
+            })
+        }
+        let { needsTags } = filter
+        needsTags = needsTags ?? []
+        let tagsPrettyRawText = ``
+        for (let tagNum in needsTags) {
+            let tag = needsTags[tagNum]
+            let { name } = tag;
+
+            if (tagNum == 0) {
+                tagsPrettyRawText += `"${name}"`
+            } else if (tagNum == needsTags.length - 1) {
+                tagsPrettyRawText += `, and "${name}"`
+            } else {
+                tagsPrettyRawText += `, "${name}"`
+
+            }
+        }
+
+        // search confirmation update
+        const resultNofif = document.getElementById("resultNofif");
+        const { shouldInclude } = filter
+        if (shouldInclude || needsTags?.length > 0) {
+            resultNofif.className = "section"
+            resultNofif.innerHTML = `
+    <i>Found <b>${results}</b> result${results === 1 ? '' : 's'}${shouldInclude ? ` including "${shouldInclude}"` : ''}${needsTags ? ` ${shouldInclude ? 'and ' : ''} having the ${tagsPrettyRawText} tag${needsTags.length === 1 ? '' : 's'}` : ''}.</i>
+    `
+        }
     }
-}
 
+    const selectTags = document.getElementById("selectTags")
+    const addTagFilter = document.getElementById("addTagFilter")
+    const removeTagFilter = document.getElementById("removeTagFilter")
 
-renderCodes()
-if (path === "/codes/") {
+    function attemptAddTagFilter(tag) {
+        if (!filter.needsTags) { filter.needsTags = [] }
+        // add to tag filter
+        if (!objectIsInsideArrayOfObjects(tag, filter.needsTags ?? [])) {
+            filter.needsTags.push(tag)
+            updateTagFilterDisplay()
+        }
+
+        // remove from deselectedTags
+        if (objectIsInsideArrayOfObjects(tag, deselectedTags)) {
+            const tagIndex = deselectedTags.indexOf(tag);
+            if (tagIndex !== -1) {
+                deselectedTags.splice(tagIndex, 1);
+            }
+
+            updateTagFilterDisplay();
+        }
+    }
+
+    function attemptRemoveTagFilter(tag) {
+        if (!filter.needsTags) { filter.needsTags = [] }
+        // remove from tag filter
+        if (objectIsInsideArrayOfObjects(tag, filter.needsTags ?? [])) {
+            let needsTags = filter.needsTags
+
+            const tagIndex = needsTags.indexOf(tag);
+            if (tagIndex !== -1) {
+                filter.needsTags.splice(tagIndex, 1);
+            }
+
+            updateTagFilterDisplay();
+        }
+
+        // add to deselected tags
+        if (!objectIsInsideArrayOfObjects(tag, deselectedTags ?? [])) {
+            deselectedTags.push(tag)
+            updateTagFilterDisplay()
+        }
+    }
+
+    function tagClickAction(tag) {
+        if (objectIsInsideArrayOfObjects(tag, filter.needsTags ?? [])) {
+            selected = true
+        } else {
+            selected = false
+        }
+        if (selected) {
+            attemptRemoveTagFilter(tag)
+        } else {
+            attemptAddTagFilter(tag)
+        }
+
+        renderCodes(filter)
+    }
+
+    function updateTagFilterDisplay() {
+        addTagFilter.innerHTML = "";
+        removeTagFilter.innerHTML = "";
+
+        let { needsTags } = filter
+
+        let areDeselectedTags = deselectedTags.length > 0
+        let areSelectedTags = needsTags?.length > 0
+
+        // iterate through selected tags that filter
+        if (areDeselectedTags) {
+            addTagFilter.style.display = "inline-flex"
+
+            for (let tagNum in deselectedTags) {
+                let tag = deselectedTags[tagNum]
+                let { type, name, selected } = tag;
+
+                addTagFilter.insertAdjacentHTML("afterbegin",
+                    `<span id="filterTag${tagNum}" class="codePreviewTag${type ? ` ${type}` : ""}">${name} (+)</span>`)
+
+                let tagElem = document.getElementById(`filterTag${tagNum}`);
+                tagElem.addEventListener("click", () => tagClickAction(tag))
+            }
+        } else {
+            addTagFilter.style.display = "none"
+        }
+
+        // iterate through deselected tags that do not filter
+        if (areSelectedTags) {
+            removeTagFilter.style.display = "inline-flex"
+            for (let tagNum in needsTags) {
+                let tag = needsTags[tagNum]
+                let { type, name, selected } = tag;
+
+                removeTagFilter.insertAdjacentHTML("afterbegin",
+                    `<span id="filterTag${tagNum}" class="codePreviewTag${type ? ` ${type}` : ""}">${name} (x)</span>`)
+
+                let tagElem = document.getElementById(`filterTag${tagNum}`);
+                tagElem.addEventListener("click", () => tagClickAction(tag))
+            }
+        } else {
+            removeTagFilter.style.display = "none"
+        }
+
+        const tagDivider = document.getElementById("tagDivider")
+        if (areDeselectedTags && areSelectedTags) {
+            tagDivider.style.display = "inline-block"
+        } else {
+            tagDivider.style.display = "none"
+        }
+    }
+
+    let filter = {}
+
+    updateTagFilterDisplay()
+    renderCodes()
+
+    // Searching for codes
     const codeSearchOutput = document.getElementById("codeSearchOutput");
     const codesSearchInput = document.getElementById("codesSearchInput")
-    const submitCode = document.getElementById("submitCode")
+    const submitSearch = document.getElementById("submitSearch")
+    const clearSearch = document.getElementById("clearSearch")
 
-    codesSearchInput.addEventListener("input", () => {
-        if (codesSearchInput.value.length > 0) {
-            submitCode.style.display = "block"
-        } else {
-            submitCode.style.display = "none"
+    codesSearchInput.addEventListener("keypress", (e) => {
+        let key = e.key
+        if (key === "Enter") {
+            let value = codesSearchInput.value;
+
+            filter.shouldInclude = value
+            renderCodes(filter)
         }
     })
-    submitCode.addEventListener("click", () => {
+    submitSearch.addEventListener("click", () => {
         let value = codesSearchInput.value;
 
-        renderCodes()
+        filter.shouldInclude = value
+        renderCodes(filter)
+    })
+    clearSearch.addEventListener("click", () => {
+        //codesSearchInput.value = ""
+        filter.shouldInclude = null
+        renderCodes(filter)
     })
 
+    setInterval(() => {
+        const searchVal = codesSearchInput.value
+        const searchLen = searchVal.length
+        if (filter.shouldInclude) {
+            clearSearch.style.display = "block"
+        } else {
+            clearSearch.style.display = "none"
+        }
+
+        submitSearch.style.display = "block"
+    }, 100)
+
+
+    // Typing animation
     let searchPlaceholders = ["Search by name", "Search by description", "Search by video URL", "Search by tags"]
     let placeInSearchPlaceholdersArray = 0;
     let placeInSearchPlaceholder = 0;

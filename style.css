@@ -133,6 +133,10 @@ h2 {
     gap: 5px;
 }
 
+.buttonRow.inline {
+    display: inline-flex;
+}
+
 .socialButton {
     display: inline-block;
     width: fit-content;
@@ -304,6 +308,9 @@ a:hover {
 
 #codesSearchInput {
     flex: 1;
+    min-width: 30px;
+    box-sizing: border-box;
+
     background-color: rgb(54, 57, 60);
     border: 1px solid rgb(95, 93, 93);
     border-radius: 3px;
@@ -312,8 +319,6 @@ a:hover {
     color: white;
 
     font-family: monospace;
-
-    width: fit-content;
 
     outline: none !important;
 }
@@ -384,7 +389,11 @@ a:hover {
     box-shadow: 0px 1px 5px rgb(95, 93, 93);
 }
 
-#submitCode {
+.submitBtn.clearSearch {
+    flex-shrink: 1;
+}
+
+#submitSearch {
     display: none;
 }
 
@@ -392,4 +401,106 @@ a:hover {
     display: flex;
     gap: 3px;
     align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.codePreviewTagGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    margin-top: -20px;
+}
+
+.codePreviewDescription {
+    font-style: italic;
+}
+
+.codePreviewTag {
+    --border-color: gray;
+    --background: rgb(78, 79, 80);
+
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+
+    background: var(--background);
+
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.codePreviewTag:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0px 2px 5px var(--border-color);
+}
+
+.codePreviewTag:active {
+    transform: translateY(-0.5px);
+
+    box-shadow: 0px 1px 5px var(--border-color);
+}
+
+.codePreviewTag.notClickable {
+    --border-color: gray;
+    --background: rgb(78, 79, 80);
+
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+
+    background: var(--background);
+
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    font-size: 10px;
+
+    cursor: default;
+    transition-duration: 0.2s;
+}
+
+.codePreviewTag.notClickable:hover {
+    transform: translateY(0px);
+
+    box-shadow: 0px 0px 0px var(--border-color);
+}
+
+.codePreviewTag.notClickable:active {
+    transform: translateY(0px);
+
+    box-shadow: 0px 0px 0px var(--border-color);
+}
+
+.codePreviewTag.new {
+    --border-color: rgb(250, 60, 60);
+    --background: linear-gradient(45deg, rgb(142, 55, 55), rgb(182, 49, 49));
+}
+
+.codePreviewTag.antibrainrot {
+    --border-color: rgb(60, 250, 98);
+    --background: linear-gradient(45deg, rgb(77, 193, 49), rgb(107, 209, 81));
+}
+
+#clearSearch {
+    display: none;
+}
+
+.section.searchResult {
+    margin-top: 20px;
+}
+
+.tagDivider, #selectTags {
+    user-select: none;
+    -moz-user-select: none;
+
+    cursor: default;
 }
