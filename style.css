@@ -504,3 +504,10 @@ a:hover {
 
     cursor: default;
 }
+
+.searchHighlight.description {
+    font-weight: 800;
+}
+.searchHighlight.title {
+    text-decoration: underline;
+}

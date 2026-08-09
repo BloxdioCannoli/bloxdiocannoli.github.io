@@ -213,7 +213,7 @@ if (path === "/codes/") {
         },
         {
             title: "Test Code",
-            description: "Desc",
+            description: "eeeee",
             tags: [{ name: "Test2", type: "antibrainrot" }, { name: "Test" }, { name: "Anti-Brainrot", type: "antibrainrot" }],
             videos: ["https://youtube.com/@BloxdioCannoli"],
             thumbnail: "67trapthumbnail.png",
@@ -250,14 +250,103 @@ if (path === "/codes/") {
 
                 tagsRawText += name
             }
-            let toSearch = `${title}${description}${tagsRawText}${videos.join("")}`
+            //let toSearch = `${title}${description}${tagsRawText}${videos.join("")}`.toLowerCase()
 
+            let contents = {}
+            for (type in code) { contents[type] = code[type] }
             // filter if needed
             if (filter) {
                 let { filterType, shouldInclude, needsTags } = filter
                 if (shouldInclude) {
-                    if (!toSearch.includes(shouldInclude)) { continue }
+                    shouldInclude = shouldInclude.toLowerCase()
+                    let included = false;
+
+                    let searchList = [{ name: "title", contents: title }, { name: "description", contents: description }, { name: "videos", contents: videos.join("") }]
+                    searchList.forEach((val, idx, arr) => { arr[idx].contents = val.contents.toLowerCase() })
+                    let matchPositions = []
+                    for (let search of searchList) {
+                        let { name } = search
+                        let toSearch = search.contents
+                        matchPositions[name] = []
+
+                        let startIdx = 0;
+                        let shouldIncludeLetterNum = 0;
+                        let maxSearchLength = shouldInclude.length
+                        for (let targetLetterNum in toSearch) {
+                            let targetLetter = toSearch[targetLetterNum]
+                            let shouldIncludeLetter = shouldInclude[shouldIncludeLetterNum]
+
+                            if (targetLetter === shouldIncludeLetter) {
+                                if (shouldIncludeLetterNum == maxSearchLength - 1) {
+                                    // found match!
+                                    let matchStart = targetLetterNum - shouldIncludeLetterNum
+                                    let matchEnd = Number(targetLetterNum)
+                                    matchPositions[name].push([matchStart, matchEnd])
+                                    shouldIncludeLetterNum = 0;
+
+                                    included = true;
+                                    //break;
+                                } else {
+                                    shouldIncludeLetterNum++;
+                                }
+                            } else {
+                                shouldIncludeLetterNum = 0;
+                            }
+                        }
+                    }
+
+                    if (!included) { continue }
+
+                    let dontHighlight = ["videos", "thumbnail", "tags"]
+                    // loop through matches by name
+
+                    for (let matchType in matchPositions) {
+                        if (dontHighlight.includes(matchType)) { continue };
+
+                        let targetPositions = matchPositions[matchType];
+
+                        // merging for edge cases to prevent weird html artifacts on overlap
+                        targetPositions.sort((a, b) => a[0] - b[0]);
+                        let mergedPositions = [];
+
+                        for (let [start, end] of targetPositions) {
+                            let last = mergedPositions[mergedPositions.length - 1];
+
+                            if (last && start <= last[1] + 1) {
+                                last[1] = Math.max(last[1], end);
+                            } else {
+                                mergedPositions.push([start, end]);
+                            }
+                        }
+                        let targetText = code[matchType].split("");
+
+                        // loop through the match positions
+                        for (let i = mergedPositions.length - 1; i >= 0; i--) {
+                            let [start, end] = mergedPositions[i];
+
+                            targetText.splice(end + 1, 0, `</span>`);
+                            targetText.splice(start, 0, `<span class="searchHighlight ${matchType}">`);
+                        }
+
+                        targetText = targetText.join("");
+                        contents[matchType] = targetText;
+
+                        // logging because building a custom search engine is painful
+                        /*console.log(`
+
+
+Target: ${targetText}
+
+Type: ${matchType}
+
+Positions: ${targetPositions.join("|")}
+
+Text: ${shouldInclude}
+`)*/
+                    }
                 }
+
+
                 // a code must include all of the tags
                 if (needsTags) {
                     let hasAll = true;
@@ -280,12 +369,12 @@ if (path === "/codes/") {
             // insert html
             codeSearchOutput.insertAdjacentHTML("beforeend", `
             <div class="section searchResult">
-                <h1>${title}</h1>
+                <h1>${contents.title}</h1>
                 <p class="codePreviewTagGroup">
                 ${tagsHTML}
                 </p>
 
-                <p class="codePreviewDescription">${description}</p>
+                <p class="codePreviewDescription">${contents.description}</p>
 
                 <p class="buttonRow">
                 <button class="socialButton youtube" id="viewVideo${codeNum}"><img src="/img/youtube-logo.png"> Watch on YouTube</button>
@@ -344,7 +433,7 @@ if (path === "/codes/") {
         if (shouldInclude || needsTags?.length > 0) {
             resultNofif.className = "section"
             resultNofif.innerHTML = `
-    <i>Found <b>${results}</b> result${results === 1 ? '' : 's'}${shouldInclude ? ` including "${shouldInclude}"` : ''}${needsTags ? ` ${shouldInclude ? 'and ' : ''} having the ${tagsPrettyRawText} tag${needsTags.length === 1 ? '' : 's'}` : ''}.</i>
+    <i>Found <b>${results}</b> result${results === 1 ? '' : 's'}${shouldInclude ? ` including "${shouldInclude}"` : ''}${needsTags.length > 0 ? ` ${shouldInclude ? 'and ' : ''} having the ${tagsPrettyRawText} tag${needsTags.length === 1 ? '' : 's'}` : ''}.</i>
     `
         }
     }
@@ -468,26 +557,20 @@ if (path === "/codes/") {
     // Searching for codes
     const codeSearchOutput = document.getElementById("codeSearchOutput");
     const codesSearchInput = document.getElementById("codesSearchInput")
-    const submitSearch = document.getElementById("submitSearch")
     const clearSearch = document.getElementById("clearSearch")
 
-    codesSearchInput.addEventListener("keypress", (e) => {
+    codesSearchInput.addEventListener("input", (e) => {
         let key = e.key
-        if (key === "Enter") {
+        if (key === "Enter" || true) {
             let value = codesSearchInput.value;
 
             filter.shouldInclude = value
             renderCodes(filter)
         }
     })
-    submitSearch.addEventListener("click", () => {
-        let value = codesSearchInput.value;
 
-        filter.shouldInclude = value
-        renderCodes(filter)
-    })
     clearSearch.addEventListener("click", () => {
-        //codesSearchInput.value = ""
+        codesSearchInput.value = ""
         filter.shouldInclude = null
         renderCodes(filter)
     })
@@ -500,8 +583,6 @@ if (path === "/codes/") {
         } else {
             clearSearch.style.display = "none"
         }
-
-        submitSearch.style.display = "block"
     }, 100)
 
 
