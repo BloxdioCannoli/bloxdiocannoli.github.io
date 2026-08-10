@@ -2,6 +2,91 @@
 Created by Bloxdio Cannoli
 */
 
+document.addEventListener("mouseleave", () => {
+    hideTooltip()
+})
+document.addEventListener("mousedown", () => {
+    hideTooltip()
+})
+
+let tooltipData = {
+    show: false,
+    content: "Tooltip",
+};
+function showTooltip(content = tooltipData.content, x = mouse.x, y = mouse.y) {
+    tooltipData.content = content
+    tooltipData.show = true;
+
+    let tooltip = document.getElementById("tooltip")
+    if (!tooltip) {
+        tooltip = document.createElement("div")
+        tooltip.id = "tooltip"
+
+        document.body.append(tooltip)
+    }
+    tooltip.className = "tooltip shown"
+    tooltip.innerHTML = `
+    ${content}
+    `
+
+    let tooltipWidth = tooltip.offsetWidth;
+    let tooltipHeight = tooltip.offsetHeight;
+
+    let documentTopEdgePos = 0
+    let documentBottomEdgePos = window.innerHeight
+    let documentLeftEdgePos = 0
+    let documentRightEdgePos = window.innerWidth
+
+    let startOffset = 20
+
+    let tooltipRightEdgePos = x + tooltipWidth + startOffset
+    let tooltipLeftEdgePos = x
+    let tooltipBottomEdgePos = y + tooltipHeight + startOffset
+    let tooltipTopEdgePos = y
+
+    let offsetTop = 20;
+    let offsetLeft = 20
+    if (tooltipRightEdgePos > documentRightEdgePos) {
+        // right edge
+        offsetLeft = documentRightEdgePos - tooltipRightEdgePos + startOffset
+    }
+    else if (tooltipLeftEdgePos < documentLeftEdgePos) {
+        // left edge
+        offsetLeft = 20
+        offsetTop = 20
+    }
+    if (tooltipBottomEdgePos > documentBottomEdgePos) {
+        // bottom edge
+        offsetTop = documentBottomEdgePos - tooltipBottomEdgePos + startOffset
+    }
+    else if (tooltipTopEdgePos < documentTopEdgePos) {
+        // top edge
+        offsetLeft = 20
+        offsetTop = 20
+    }
+    tooltip.style.top = `${y + offsetTop}px`
+    tooltip.style.left = `${x + offsetLeft}px`
+}
+
+function hideTooltip() {
+    tooltipData.show = false;
+
+    let tooltip = document.getElementById("tooltip")
+    if (tooltip) {
+        tooltip.className = "tooltip hidden"
+    }
+}
+
+var mouse = { x: 0, y: 0 }
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
+
+    if (tooltipData.show) {
+        showTooltip()
+    }
+});
+
 // Some helper functions
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -203,18 +288,62 @@ for (let faqGroup of document.getElementsByClassName("faq")) {
 
 // Search
 if (path === "/codes/") {
+    const ptags = { // preset tags
+        test: { name: "Test", desc: "Tooltip" },
+        new: { name: "New", type: "new", desc: "This code is new." },
+        antibrainrot: { name: "Anti-Brainrot", type: "antibrainrot", desc: "This code is against brainrot!" },
+        beta: { name: "Beta", type: "beta", desc: "This code is still being developed. It might have bugs." },
+        customizable: { name: "Customizable", type: "customizable", desc: "You can customize the code." },
+        popular: { name: "Popular", type: "popular", desc: "This code is popular!" },
+
+    }
     const codes = [
         {
             title: "67 Kill Codes",
             description: "3 codes (+1 bonus code) to kill 67's in Bloxd.io. Paste in 1 World Code and select any 4 ingame to use. Includes burning, miniguns, an infinite kill trap, and explosions.",
-            tags: [{ name: "Anti-Brainrot", type: "antibrainrot" }, { name: "New", type: "new" }],
+            tags: [ptags.antibrainrot, ptags.new, ptags.popular],
             videos: ["https://youtube.com/@BloxdioCannoli"],
             thumbnail: "67trapthumbnail.png",
         },
         {
             title: "Test Code",
             description: "eeeee",
-            tags: [{ name: "Test2", type: "antibrainrot" }, { name: "Test" }, { name: "Anti-Brainrot", type: "antibrainrot" }],
+            tags: [...Object.values(ptags)],
+            videos: ["https://youtube.com/@BloxdioCannoli"],
+            thumbnail: "67trapthumbnail.png",
+        },
+        {
+            title: "Test Code",
+            description: "eeeee",
+            tags: [...Object.values(ptags)],
+            videos: ["https://youtube.com/@BloxdioCannoli"],
+            thumbnail: "67trapthumbnail.png",
+        },
+        {
+            title: "Test Code",
+            description: "eeeee",
+            tags: [...Object.values(ptags)],
+            videos: ["https://youtube.com/@BloxdioCannoli"],
+            thumbnail: "67trapthumbnail.png",
+        },
+        {
+            title: "Test Code",
+            description: "eeeee",
+            tags: [...Object.values(ptags)],
+            videos: ["https://youtube.com/@BloxdioCannoli"],
+            thumbnail: "67trapthumbnail.png",
+        },
+        {
+            title: "Test Code",
+            description: "eeeee",
+            tags: [...Object.values(ptags)],
+            videos: [],
+            thumbnail: "67trapthumbnail.png",
+        },
+        {
+            title: "Test Code",
+            description: "eeeee",
+            tags: [...Object.values(ptags)],
             videos: ["https://youtube.com/@BloxdioCannoli"],
             thumbnail: "67trapthumbnail.png",
         },
@@ -230,15 +359,10 @@ if (path === "/codes/") {
     }
 
     function renderCodes(filter = {}) {
-        const codeSearchOutput = document.getElementById("codeSearchOutput");
-        codeSearchOutput.innerHTML = ""
+        let dynamicCodes = []
 
         // iterate through `codes` object[]
-        codeSearchOutput.insertAdjacentHTML("beforeend", `
-        <div id="resultNofif">
 
-        </div>
-    `)
         let results = 0;
         for (let codeNum in codes) {
             let code = codes[codeNum]
@@ -250,7 +374,10 @@ if (path === "/codes/") {
 
                 tagsRawText += name
             }
-            //let toSearch = `${title}${description}${tagsRawText}${videos.join("")}`.toLowerCase()
+
+            // init the scoring vars to be ignored if not needed
+            let wordMatches = 0;
+            let tagMatches = 0;
 
             let contents = {}
             for (type in code) { contents[type] = code[type] }
@@ -301,9 +428,15 @@ if (path === "/codes/") {
                     // loop through matches by name
 
                     for (let matchType in matchPositions) {
-                        if (dontHighlight.includes(matchType)) { continue };
-
+                        let targetText = code[matchType];
                         let targetPositions = matchPositions[matchType];
+
+                        wordMatches += targetPositions.length
+
+                        // skip highlighting if needed
+                        if (dontHighlight.includes(matchType)) { contents[matchType] = targetText; continue };
+
+                        targetText = targetText.split("")
 
                         // merging for edge cases to prevent weird html artifacts on overlap
                         targetPositions.sort((a, b) => a[0] - b[0]);
@@ -318,7 +451,6 @@ if (path === "/codes/") {
                                 mergedPositions.push([start, end]);
                             }
                         }
-                        let targetText = code[matchType].split("");
 
                         // loop through the match positions
                         for (let i = mergedPositions.length - 1; i >= 0; i--) {
@@ -344,14 +476,15 @@ Positions: ${targetPositions.join("|")}
 Text: ${shouldInclude}
 `)*/
                     }
+
                 }
 
-
-                // a code must include all of the tags
+                // a code must include all of the tags; not all of the tags need to attached to the code
                 if (needsTags) {
                     let hasAll = true;
                     for (let tag of needsTags) {
                         if (!objectIsInsideArrayOfObjects(tag, tags ?? [])) { hasAll = false; break; }
+                        tagMatches++;
                     }
                     if (!hasAll) { continue }
                 }
@@ -366,7 +499,35 @@ Text: ${shouldInclude}
 
                 tagsHTML += `<span id="codePreviewTag${codeNum}${tagNum}" class="codePreviewTag notClickable${type ? ` ${type}` : ""}">${name}</span>`
             }
+            dynamicCodes.push(
+                {
+                    contents: contents,
+                    tagsHTML: tagsHTML,
+                    tags: tags,
+                    originalIdx: codeNum,
+                    score: wordMatches + tagMatches,
+                }
+            )
+        }
+        // perform actions relating to modified code previews
+
+        // prepare search notification
+        const codeSearchOutput = document.getElementById("codeSearchOutput");
+        codeSearchOutput.innerHTML = ""
+        codeSearchOutput.insertAdjacentHTML("beforeend", `
+        <div id="resultNofif">
+
+        </div>
+    `)
+
+        dynamicCodes = dynamicCodes.sort((a, b) => { return b.score - a.score })
+        for (let codeNum in dynamicCodes) {
+            let code = dynamicCodes[codeNum]
+            let { contents, tagsHTML, originalIdx, score, tags } = dynamicCodes[codeNum];
+            //console.log(dynamicCodes[codeNum])
             // insert html
+
+            let showVideoButton = !!contents.videos[0]
             codeSearchOutput.insertAdjacentHTML("beforeend", `
             <div class="section searchResult">
                 <h1>${contents.title}</h1>
@@ -377,17 +538,25 @@ Text: ${shouldInclude}
                 <p class="codePreviewDescription">${contents.description}</p>
 
                 <p class="buttonRow">
-                <button class="socialButton youtube" id="viewVideo${codeNum}"><img src="/img/youtube-logo.png"> Watch on YouTube</button>
+                ${showVideoButton ? `<button class="socialButton youtube" id="viewVideo${codeNum}"><img src="/img/youtube-logo.png"> Watch on YouTube</button>` : ''}
                 <button class="socialButton code" id="viewCode${codeNum}"><img id="viewCodeImg${codeNum}" src="img/code-block.png"> View Full Code</button>
                 </p>
             </div>
         `)
             // configure tags
             for (let tagNum in tags) {
-                let tagElem = document.getElementById(`codePreviewTag${codeNum}${tagNum}`)
-                tagElem.addEventListener("click", () => {
-                    // select the tag
-                })
+                let tag = tags[tagNum]
+                let { desc } = tag
+                let tagElem = document.getElementById(`codePreviewTag${originalIdx}${tagNum}`)
+
+                if (desc) {
+                    tagElem.addEventListener("mouseenter", () => {
+                        showTooltip(desc)
+                    })
+                    tagElem.addEventListener("mouseleave", () => {
+                        hideTooltip()
+                    })
+                }
             }
 
             let viewCode = document.getElementById(`viewCode${codeNum}`)
@@ -405,10 +574,18 @@ Text: ${shouldInclude}
                 viewCodeImg.src = "img/code-block.png"
             })
 
+            if (viewVideo) {
+                viewVideo.addEventListener("click", () => {
+                    window.open(contents.videos[0], "_blank")
+                })
 
-            viewVideo.addEventListener("click", () => {
-                window.open(videos[0], "_blank")
-            })
+                viewVideo.addEventListener("mouseenter", () => {
+                    showTooltip("Watch a video about the code on YouTube.")
+                })
+                viewVideo.addEventListener("mouseleave", () => {
+                    hideTooltip()
+                })
+            }
         }
         let { needsTags } = filter
         needsTags = needsTags ?? []
@@ -518,7 +695,16 @@ Text: ${shouldInclude}
                     `<span id="filterTag${tagNum}" class="codePreviewTag${type ? ` ${type}` : ""}">${name} (+)</span>`)
 
                 let tagElem = document.getElementById(`filterTag${tagNum}`);
-                tagElem.addEventListener("click", () => tagClickAction(tag))
+                tagElem.addEventListener("click", () => {
+                    tagClickAction(tag)
+                })
+
+                tagElem.addEventListener("mouseover", () => {
+                    showTooltip(`Click to make all results need to include this tag.`)
+                })
+                tagElem.addEventListener("mouseleave", () => {
+                    hideTooltip()
+                })
             }
         } else {
             addTagFilter.style.display = "none"
@@ -535,7 +721,15 @@ Text: ${shouldInclude}
                     `<span id="filterTag${tagNum}" class="codePreviewTag${type ? ` ${type}` : ""}">${name} (x)</span>`)
 
                 let tagElem = document.getElementById(`filterTag${tagNum}`);
-                tagElem.addEventListener("click", () => tagClickAction(tag))
+                tagElem.addEventListener("click", () => {
+                    tagClickAction(tag)
+                })
+                tagElem.addEventListener("mouseover", () => {
+                    showTooltip(`Click to make all results no longer need to include this tag.`)
+                })
+                tagElem.addEventListener("mouseleave", () => {
+                    hideTooltip()
+                })
             }
         } else {
             removeTagFilter.style.display = "none"
@@ -558,6 +752,20 @@ Text: ${shouldInclude}
     const codeSearchOutput = document.getElementById("codeSearchOutput");
     const codesSearchInput = document.getElementById("codesSearchInput")
     const clearSearch = document.getElementById("clearSearch")
+
+    codesSearchInput.addEventListener("mouseover", () => {
+        showTooltip(`Results must include what you type here.`)
+    })
+    codesSearchInput.addEventListener("mouseleave", () => {
+        hideTooltip()
+    })
+
+    clearSearch.addEventListener("mouseover", () => {
+        showTooltip(`Clear text search.`)
+    })
+    clearSearch.addEventListener("mouseleave", () => {
+        hideTooltip()
+    })
 
     codesSearchInput.addEventListener("input", (e) => {
         let key = e.key

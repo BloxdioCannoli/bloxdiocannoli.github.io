@@ -410,6 +410,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     gap: 5px;
+    flex-wrap: wrap;
 
     margin-top: -20px;
 }
@@ -439,6 +440,7 @@ a:hover {
 
 .codePreviewTag:hover {
     transform: translateY(-2px);
+    filter: brightness(110%);
 
     box-shadow: 0px 2px 5px var(--border-color);
 }
@@ -462,6 +464,10 @@ a:hover {
     padding-left: 8px;
     padding-right: 8px;
 
+    display: flex;
+    align-items: center;
+    text-align: center;
+
     font-size: 10px;
 
     cursor: default;
@@ -470,6 +476,7 @@ a:hover {
 
 .codePreviewTag.notClickable:hover {
     transform: translateY(0px);
+    filter: brightness(110%);
 
     box-shadow: 0px 0px 0px var(--border-color);
 }
@@ -490,6 +497,21 @@ a:hover {
     --background: linear-gradient(45deg, rgb(77, 193, 49), rgb(107, 209, 81));
 }
 
+.codePreviewTag.popular {
+    --border-color: rgb(220, 218, 79);
+    --background: linear-gradient(45deg, rgb(148, 140, 66), rgb(195, 162, 19));
+}
+
+.codePreviewTag.beta {
+    --border-color: rgb(112, 155, 224);
+    --background: linear-gradient(45deg, rgb(66, 64, 131), rgb(63, 117, 226));
+}
+
+.codePreviewTag.customizable {
+    --border-color: rgb(188, 103, 231);
+    --background: linear-gradient(45deg, rgb(129, 64, 131), rgb(106, 29, 207));
+}
+
 #clearSearch {
     display: none;
 }
@@ -498,16 +520,73 @@ a:hover {
     margin-top: 20px;
 }
 
-.tagDivider, #selectTags {
+.tagDivider,
+#selectTags {
     user-select: none;
     -moz-user-select: none;
 
     cursor: default;
 }
 
+.tagDivider {
+    border-left: 1px dashed lightgray;
+    width: 1px;
+}
+
 .searchHighlight.description {
     font-weight: 800;
 }
+
 .searchHighlight.title {
     text-decoration: underline;
+}
+
+.tooltip {
+    position: fixed;
+
+    display: inline-block;
+    text-align: left;
+    width: max-content;
+    max-width: none;
+
+    border-radius: 3px;
+    border: 1px solid rgb(86, 86, 86);
+
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+
+    padding: 5px;
+
+    font-size: 10px;
+
+    z-index: 100;
+}
+
+.tooltip.shown {
+    animation: fadeIn 0.1s ease-in forwards;
+}
+
+.tooltip.hidden {
+    animation: fadeOut 0.1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
