@@ -1,0 +1,38 @@
+{
+    "codes": [
+        {
+            "thumbnail": "img/67trapthumbnail.png",
+            "title": "67 Kill Codes",
+            "description": "3 codes (+1 bonus code) to kill 67's in Bloxd.io. Paste in 1 World Code and select any 4 ingame to use. Includes burning, miniguns, an infinite kill trap, and explosions.",
+            "tags": [
+                "antibrainrot",
+                "new",
+                "popular"
+            ],
+            "videos": [],
+            "images": [
+                {
+                    "url": "/codes/img/67trapthumbnail.png",
+                    "caption": "Thumbnail"
+                }
+            ],
+            "codes": {
+                "worldCodeFiles": [
+                    {
+                        "name": "index.js",
+                        "path": "/codes/scripts/killa67worldcode.js"
+                    }
+                ],
+                "codeBlocks": [
+                    {
+                        "name": "Spawn a 67",
+                        "subtitleOverride": "Click the code block to manually spawn a 67 without the orbs.",
+                        "path": "/codes/scripts/spawna67.js"
+                    }
+                ]
+            },
+
+            "id": "67killcodes"
+        }
+    ]
+}
