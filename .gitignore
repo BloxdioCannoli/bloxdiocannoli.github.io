@@ -1,0 +1,5 @@
+# Block .DS_Store in the main folder and all subfolders
+*.DS_Store
+**/.DS_Store
+
+
