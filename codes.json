@@ -1,0 +1,119 @@
+{
+    "codes": [
+        {
+            "thumbnail": "/codes/67killcodes/thumbnail.png",
+            "title": "67 Kill Codes",
+            "description": "3 codes (+1 bonus code) to kill 67's in Bloxd.io. Paste in 1 World Code and select any 4 ingame to use. Includes burning, miniguns, an infinite kill trap, and explosions.",
+            "tags": [
+                "antibrainrot",
+                "new",
+                "popular"
+            ],
+            "videos": [],
+            "images": [
+                {
+                    "url": "/codes/67killcodes/thumbnail.png",
+                    "caption": "Thumbnail"
+                }
+            ],
+            "codes": {
+                "worldCodeFiles": [
+                    {
+                        "name": "index.js",
+                        "path": "/codes/67killcodes/killa67worldcode.js"
+                    }
+                ],
+                "codeBlocks": [
+                    {
+                        "name": "Spawn a 67",
+                        "subtitleOverride": "Click the code block to manually spawn a 67 without the orbs.",
+                        "path": "/codes/67killcodes/spawna67.js"
+                    }
+                ]
+            },
+            "additionalInfo": "This code has not yet been released.<br><br>Thank you to the_ccccc's Burn a Brainrot for inspiring the bonus code.",
+            "id": "67killcodes",
+            "unlisted": true
+        },
+        {
+            "thumbnail": "/codes/netheriteweapons/thumbnail.png",
+            "title": "Netherite Weapons",
+            "description": "Get a tier of weapons and armor above diamond, craftable with diamonds and moonstone.",
+            "tags": [
+                "new",
+                "popular"
+            ],
+            "videos": [],
+            "images": [
+                {
+                    "url": "/codes/netheriteweapons/thumbnail.png",
+                    "caption": "Thumbnail"
+                },
+                {
+                    "url": "/codes/netheriteweapons/netherite spear thumbnail.png",
+                    "caption": "<a href='https://bloxd.io/game/classic_playerSchematic%7CTJWxQEmcZZO9W1WzXuSp3?tab=manage' target='_blank'>Custom game</a>"
+                }
+            ],
+            "buttons": [
+                {
+                    "type": "customGame",
+                    "text": "Play Game",
+                    "link": "https://bloxd.io/game/classic_playerSchematic%7CTJWxQEmcZZO9W1WzXuSp3?tab=manage"
+                }
+            ],
+            "codes": {
+                "worldCodeFiles": [
+                    {
+                        "name": "index.js",
+                        "path": "/codes/netheriteweapons/netheriteweapons.js"
+                    }
+                ],
+                "codeBlocks": [
+                    {
+                        "name": "Starter pack",
+                        "subtitleOverride": "Click the code block to give some Netherite starter gear. More custom Netherite weapons can be found in the Workbench if you have Netherite in your inventory.",
+                        "path": "/codes/netheriteweapons/getnetheritearmor.js"
+                    }
+                ]
+            },
+            "additionalInfo": "This code has not yet been released.<br><br>Nether background from Oreo-belt's Companion SMP",
+            "id": "netheriteweapons",
+            "unlisted": true
+        },
+        {
+            "thumbnail": "/codes/everyoneisadev/thumbnail.webp",
+            "title": "Everyone is a Dev",
+            "description": "Make everyone a dev in the leaderboard, their chat, and their nametag. <b>The dev rank is cosmetic; it does not transfer to other games or give special admin powers.</b>",
+            "tags": [
+                "new",
+                "popular"
+            ],
+            "videos": [],
+            "images": [
+                {
+                    "url": "/codes/everyoneisadev/everyoneisadevleaderboard.png",
+                    "caption": "It shows up in the player list"
+                },
+                {
+                    "url": "/codes/everyoneisadev/everyoneisadevnametag.png",
+                    "caption": "It appears in your ingame name tag"
+                },
+                {
+                    "url": "/codes/everyoneisadev/everyoneisadevchat.png",
+                    "caption": "It appears in chat"
+                }
+            ],
+            "codes": {
+                "worldCodeFiles": [
+                    {
+                        "name": "index.js",
+                        "path": "/codes/everyoneisadev/everyoneisadev.js"
+                    }
+                ]
+            },
+            "additionalInfo": "If you already have Super Rank, the code will give you 2 super ranks. To fix this, simply say '/nick' in chat.",
+            "id": "everyoneisadev",
+            "unlisted": false
+        }
+    ]
+}
