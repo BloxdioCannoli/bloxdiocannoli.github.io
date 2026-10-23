@@ -1,0 +1,410 @@
+{
+    "materials": [
+        {
+            "type": "shaderPack",
+            "thumbnail": "/materials/cannolishader/beforeafter.png",
+            "title": "Bloxdio Cannoli Shader",
+            "description": "My personal shader pack. It has realistic water, dark caves, a cinematic tint, and some general effects to make the game look nicer.",
+            "tags": [
+                "personalShader",
+                "new",
+                "realistic",
+                "cinematic",
+                "recentlyUpdated"
+            ],
+            "videos": [
+                {
+                    "name": "About shaders",
+                    "url": "https://www.youtube.com/watch?v=8ItcIU-BnIE&feature=youtu.be"
+                }
+            ],
+            "images": [
+                {
+                    "url": "/materials/cannolishader/beforeafter.png",
+                    "caption": "With (left) and without (right) shaders"
+                },
+                {
+                    "url": "/materials/cannolishader/beforeaftercaves.png",
+                    "caption": "Caves are a lot darker now"
+                }
+            ],
+            "shaderPacks": [
+                {
+                    "name": "Bloxdio Cannoli Shader",
+                    "image": "/materials/cannolishader/beforeafter.png",
+                    "path": "/materials/cannolishader/shaderpack.zip"
+                }
+            ],
+            "additionalInfo": "For the best experience, enable lighting and use Chrome Browser on a newer machine.",
+            "id": "cannolishader"
+        },
+        {
+            "type": "shaderPack",
+            "thumbnail": "/materials/solitude2point0/thumbnail.png",
+            "title": "Solitude 2.0",
+            "description": "A very cinematic shader with brighter colors.",
+            "tags": [
+                "new",
+                "cinematic"
+            ],
+            "videos": [
+                {
+                    "name": "About shaders",
+                    "url": "https://www.youtube.com/watch?v=8ItcIU-BnIE&feature=youtu.be"
+                }
+            ],
+            "images": [
+                {
+                    "url": "/materials/solitude2point0/thumbnail.png",
+                    "caption": "Thumbnail"
+                }
+            ],
+            "shaderPacks": [
+                {
+                    "name": "Solitude 2.0",
+                    "image": "/materials/solitude2point0/thumbnail.png",
+                    "path": "/materials/solitude2point0/shaderpack.zip"
+                }
+            ],
+            "additionalInfo": "For the best experience, enable lighting and use Chrome Browser on a newer machine.",
+            "id": "solitude2point0"
+        },
+        {
+            "type": "shaderPack",
+            "thumbnail": "/materials/grainbound/thumbnail.png",
+            "title": "GrainBound",
+            "description": "A more realistic shader with grounded colors and grainy textures.",
+            "tags": [
+                "new",
+                "realistic"
+            ],
+            "videos": [
+                {
+                    "name": "About shaders",
+                    "url": "https://www.youtube.com/watch?v=8ItcIU-BnIE&feature=youtu.be"
+                },
+                {
+                    "name": "POV: SHADERS in Bloxd.io",
+                    "url": "https://www.youtube.com/shorts/PFqiGyp2IYU"
+                }
+            ],
+            "images": [
+                {
+                    "url": "/materials/grainbound/thumbnail.png",
+                    "caption": "Thumbnail"
+                }
+            ],
+            "shaderPacks": [
+                {
+                    "name": "GrainBound",
+                    "image": "/materials/grainbound/thumbnail.png",
+                    "path": "/materials/grainbound/shaderpack.zip"
+                }
+            ],
+            "additionalInfo": "For the best experience, enable lighting and use Chrome Browser on a newer machine.",
+            "id": "grainbound"
+        },
+        {
+            "type": "code",
+            "thumbnail": "/materials/everyoneisadev/thumbnail.webp",
+            "title": "Everyone is a Dev",
+            "description": "Make everyone a dev in the leaderboard, their chat, and their nametag. <b>The dev rank is cosmetic; it does not transfer to other games or give special admin powers.</b>",
+            "tags": [],
+            "videos": [],
+            "images": [
+                {
+                    "url": "/materials/everyoneisadev/everyoneisadevleaderboard.png",
+                    "caption": "It shows up in the player list"
+                },
+                {
+                    "url": "/materials/everyoneisadev/everyoneisadevnametag.png",
+                    "caption": "It appears in your ingame name tag"
+                },
+                {
+                    "url": "/materials/everyoneisadev/everyoneisadevchat.png",
+                    "caption": "It appears in chat"
+                }
+            ],
+            "codes": {
+                "worldCodeFiles": [
+                    {
+                        "name": "index.js",
+                        "path": "/materials/everyoneisadev/everyoneisadev.js"
+                    }
+                ]
+            },
+            "additionalInfo": "If you already have Super Rank, the code will give you 2 super ranks. To fix this, simply say '/nick' in chat.",
+            "id": "everyoneisadev",
+            "unlisted": false
+        },
+        {
+            "type": "shaderPack",
+            "thumbnail": "/materials/404shader/thumbnail.png",
+            "title": "404",
+            "description": "Makes every block look glitchy.",
+            "tags": [
+                "new",
+                "trippy"
+            ],
+            "videos": [
+                {
+                    "name": "About shaders",
+                    "url": "https://www.youtube.com/watch?v=8ItcIU-BnIE&feature=youtu.be"
+                }
+            ],
+            "images": [
+                {
+                    "url": "/materials/404shader/thumbnail.png",
+                    "caption": "Thumbnail"
+                }
+            ],
+            "shaderPacks": [
+                {
+                    "name": "404",
+                    "image": "/materials/404shader/thumbnail.png",
+                    "path": "/materials/404shader/shaderpack.zip"
+                }
+            ],
+            "boost": -8,
+            "additionalInfo": "For the best experience, use Chrome Browser on a newer machine.",
+            "id": "404shader"
+        },
+        {
+            "type": "shaderPack",
+            "thumbnail": "/materials/inkwell/thumbnail.png",
+            "title": "Inkwell",
+            "description": "Converts all blocks <b>(not entities or mesh like grass or boats, that's sadly not possible)</b> to grayscale.",
+            "tags": [
+                "new",
+                "trippy"
+            ],
+            "videos": [
+                {
+                    "name": "About shaders",
+                    "url": "https://www.youtube.com/watch?v=8ItcIU-BnIE&feature=youtu.be"
+                }
+            ],
+            "images": [
+                {
+                    "url": "/materials/inkwell/thumbnail.png",
+                    "caption": "Thumbnail"
+                }
+            ],
+            "shaderPacks": [
+                {
+                    "name": "Inkwell",
+                    "image": "/materials/inkwell/thumbnail.png",
+                    "path": "/materials/inkwell/shaderpack.zip"
+                }
+            ],
+            "boost": -8,
+            "additionalInfo": "For the best experience, use Chrome Browser on a newer machine.",
+            "id": "inkwell"
+        },
+        {
+            "type": "shaderPack",
+            "thumbnail": "/materials/possessedbyworms/thumbnail.gif",
+            "title": "Possessed by Worms",
+            "description": "A unique shader that makes the blocks wiggle. <b>Only works in select gamemodes: mainly Creative and Test Mode</b>",
+            "tags": [
+                "new",
+                "trippy"
+            ],
+            "videos": [
+                {
+                    "name": "About shaders",
+                    "url": "https://www.youtube.com/watch?v=8ItcIU-BnIE&feature=youtu.be"
+                }
+            ],
+            "images": [
+                {
+                    "url": "/materials/possessedbyworms/thumbnail.gif",
+                    "caption": "Thumbnail"
+                }
+            ],
+            "shaderPacks": [
+                {
+                    "name": "Posessed by Worms",
+                    "image": "/materials/possessedbyworms/thumbnail.gif",
+                    "path": "/materials/possessedbyworms/shaderpack.zip"
+                }
+            ],
+            "boost": -9,
+            "additionalInfo": "Only works in select gamemodes, mainly: <a href='https://bloxd.io/game/creative'>creative</a>, and <a href='https://preprod.bloxd.io/game/schematicTester'>Test Mode</a>, and only if your machine/browser supports WebGPU.",
+            "id": "possessedbyworms"
+        },
+        {
+            "type": "code",
+            "thumbnail": "/materials/portalgun/thumbnail.png",
+            "title": "Portal Gun",
+            "description": "Use a working portal gun! Click while holding it to fire an orange portal, then click again to fire a blue portal. Anything that enters one portal goes into the other one that its owner created. Hit a portal to break it. Only 1 pair of portals per player.",
+            "tags": [
+                "new",
+                "popular"
+            ],
+            "videos": [
+                {
+                    "name": "Tutorial video",
+                    "url": "https://www.youtube.com/watch?v=_12211BAt3g"
+                },
+                {
+                    "name": "POV: PORTAL GUNS in Bloxd.io",
+                    "url": "https://www.youtube.com/shorts/rwzEFAa5Pvs"
+                }
+            ],
+            "images": [
+                {
+                    "url": "/materials/portalgun/thumbnail.png",
+                    "caption": "Thumbnail"
+                },
+                {
+                    "url": "/materials/portalgun/infinite loop.png",
+                    "caption": "You can put mobs into an infinite loop."
+                },
+                {
+                    "url": "/materials/portalgun/portal gun.png",
+                    "caption": "Here's what your portal gun looks like."
+                }
+            ],
+            "codes": {
+                "worldCodeFiles": [
+                    {
+                        "name": "index.js",
+                        "path": "/materials/portalgun/index.js"
+                    }
+                ]
+            },
+            "additionalInfo": "",
+            "id": "portalgun"
+        },
+        {
+            "type": "code",
+            "thumbnail": "/materials/67killcodes/thumbnail.png",
+            "title": "67 Kill Codes",
+            "description": "3 codes (+1 bonus code) to kill 67's in Bloxd.io. Paste in 1 World Code and select any 4 ingame to use. Includes burning, miniguns, an infinite kill trap, and explosions.",
+            "tags": [
+                "antibrainrot",
+                "popular"
+            ],
+            "videos": [
+                {
+                    "name": "Tutorial video",
+                    "url": "https://www.youtube.com/watch?v=op7WCDdZZVY"
+                },
+                {
+                    "name": "Kill farm",
+                    "url": "https://youtube.com/shorts/qF37Wb0CuhE"
+                },
+                {
+                    "name": "Statue burning",
+                    "url": "https://youtube.com/shorts/UCnJecEQLeI"
+                },
+                {
+                    "name": "Minigun shooting",
+                    "url": "https://youtube.com/shorts/pCS-Cz7BT-0"
+                },
+                {
+                    "name": "Explosive arrows",
+                    "url": "https://youtube.com/shorts/9XHgkQh1sv4"
+                }
+            ],
+            "images": [
+                {
+                    "url": "/materials/67killcodes/thumbnail.png",
+                    "caption": "Thumbnail"
+                }
+            ],
+            "codes": {
+                "worldCodeFiles": [
+                    {
+                        "name": "index.js",
+                        "path": "/materials/67killcodes/killa67worldcode.js"
+                    }
+                ],
+                "codeBlocks": [
+                    {
+                        "name": "Spawn a 67",
+                        "subtitleOverride": "Click the code block to manually spawn a 67 without the orbs.",
+                        "path": "/materials/67killcodes/spawna67.js"
+                    }
+                ]
+            },
+            "additionalInfo": "Thank you to the_ccccc's Burn a Brainrot for inspiring the bonus code.",
+            "id": "67killcodes"
+        },
+        {
+            "type": "code",
+            "thumbnail": "/materials/netheriteweapons/thumbnail.png",
+            "title": "Netherite Weapons",
+            "description": "Get a tier of weapons and armor above diamond, craftable with diamonds and moonstone.",
+            "tags": [
+                "new",
+                "popular"
+            ],
+            "videos": [],
+            "images": [
+                {
+                    "url": "/materials/netheriteweapons/thumbnail.png",
+                    "caption": "Thumbnail"
+                },
+                {
+                    "url": "/materials/netheriteweapons/netherite spear thumbnail.png",
+                    "caption": "<a href='https://bloxd.io/game/classic_playerSchematic%7CTJWxQEmcZZO9W1WzXuSp3?tab=manage' target='_blank'>Custom game</a>"
+                }
+            ],
+            "buttons": [
+                {
+                    "type": "customGame",
+                    "text": "Play Game",
+                    "link": "https://bloxd.io/game/classic_playerSchematic%7CTJWxQEmcZZO9W1WzXuSp3?tab=manage"
+                }
+            ],
+            "codes": {
+                "worldCodeFiles": [
+                    {
+                        "name": "index.js",
+                        "path": "/materials/netheriteweapons/netheriteweapons.js"
+                    }
+                ],
+                "codeBlocks": [
+                    {
+                        "name": "Starter pack",
+                        "subtitleOverride": "Click the code block to give some Netherite starter gear. More custom Netherite weapons can be found in the Workbench if you have Netherite in your inventory.",
+                        "path": "/materials/netheriteweapons/getnetheritearmor.js"
+                    }
+                ]
+            },
+            "additionalInfo": "This code has not yet been released.<br><br>Nether background from Oreo-belt's Companion SMP",
+            "id": "netheriteweapons",
+            "unlisted": true
+        },
+        {
+            "type": "code",
+            "thumbnail": "/materials/wintercodes/thumbnail.png",
+            "title": "Winter Codes",
+            "description": "Become a powerful Frost Wraith this Winter season!",
+            "tags": [
+                "new",
+                "popular"
+            ],
+            "videos": [],
+            "images": [
+                {
+                    "url": "/materials/wintercodes/thumbnail.png",
+                    "caption": "Thumbnail"
+                }
+            ],
+            "codes": {
+                "worldCodeFiles": [
+                    {
+                        "name": "index.js",
+                        "path": "/materials/wintercodes/wintercodes.js"
+                    }
+                ]
+            },
+            "additionalInfo": "This isn't out yet.",
+            "id": "wintercodes",
+            "unlisted": true
+        }
+    ]
+}
